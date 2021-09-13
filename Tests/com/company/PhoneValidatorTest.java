@@ -11,7 +11,7 @@ class PhoneValidatorTest {
     public static PhoneValidator phoneValidator;
 
     @BeforeAll
-    public static void setup() throws PhoneNumberException{
+    public static void setup() {
         phoneValidator = new PhoneValidator();
     }
 
@@ -37,7 +37,7 @@ class PhoneValidatorTest {
 
     @Test
     void Should_Pass_WhenCustomValidationIsGiven() throws PhoneNumberException {
-        HashMap<Integer,String> rules = new HashMap<Integer,String>();
+        HashMap<Integer,String> rules = new HashMap<>();
         rules.put(12,"+371");
         PhoneValidator customPhoneValidator = new PhoneValidator(rules);
         assertEquals("+37161234567", customPhoneValidator.validate("+37161234567"));

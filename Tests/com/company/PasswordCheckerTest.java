@@ -12,7 +12,7 @@ class PasswordCheckerTest {
     public static PasswordChecker passwordChecker;
 
     @BeforeAll
-    public static void setup() throws PasswordException{
+    public static void setup() {
         passwordChecker = new PasswordChecker();
     }
 
@@ -23,7 +23,7 @@ class PasswordCheckerTest {
 
     @Test
     void Should_ThrowException_When_PasswordDoesntContainUppercaseLetter() {
-        assertThrows(PasswordDoesntContainUppercaseSymbolException.class, ()-> { passwordChecker.validate("123456789");});
+        assertThrows(PasswordDoesntContainUppercaseLetterException.class, ()-> { passwordChecker.validate("123456789");});
     }
 
     @Test
@@ -55,7 +55,7 @@ class PasswordCheckerTest {
 
     @Test
     void Should_Pass_When_PasswordContainsCustomSpecialSymbol() throws  PasswordException{
-        ArrayList<Character> specialSymbols = new ArrayList<Character>();
+        ArrayList<Character> specialSymbols = new ArrayList<>();
         specialSymbols.add('$');
         PasswordChecker customPasswordChecker = new PasswordChecker(specialSymbols);
         customPasswordChecker.validate("S$123456");
@@ -64,15 +64,15 @@ class PasswordCheckerTest {
     @Test
     void Should_Pass_When_PasswordContainsCustomSpecialSymbolAndIsLongerThanCustomMinLength() throws  PasswordException{
         int minLength = 5;
-        ArrayList<Character> specialSymbols = new ArrayList<Character>();
+        ArrayList<Character> specialSymbols = new ArrayList<>();
         specialSymbols.add('$');
         PasswordChecker customPasswordChecker = new PasswordChecker(minLength, specialSymbols);
         customPasswordChecker.validate("S$126");
     }
 
     @Test
-    void Should_ThrowException_When_NumberGivenToConstructorIsLessThanOne() {
+    void Should_ThrowException_WhenMinLengthIsLessThanOne() {
         int incorrectMinLength = 0;
-        assertThrows(PasswordLenghtIsLessThanOneException.class, ()-> { PasswordChecker customPasswordChecker = new PasswordChecker(incorrectMinLength);});
+        assertThrows(PasswordMinLenghtIsLessThanOneException.class, ()-> { PasswordChecker customPasswordChecker = new PasswordChecker(incorrectMinLength);});
     }
 }

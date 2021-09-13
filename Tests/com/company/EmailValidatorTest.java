@@ -64,7 +64,7 @@ class EmailValidatorTest {
     }
 
     @Test
-    void Should_ThrowException_When_EmailTLDIsEmpty() {\
+    void Should_ThrowException_When_EmailTLDIsEmpty() {
         assertThrows(EmailTLDException.class, () ->{emailValidator.validate("username@gmail.");});
     }
 
