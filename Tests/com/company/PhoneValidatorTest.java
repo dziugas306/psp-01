@@ -37,16 +37,16 @@ class PhoneValidatorTest {
 
     @Test
     void Should_Pass_WhenCustomValidationIsGiven() throws PhoneNumberException {
-        HashMap<Integer,String> rules = new HashMap<>();
-        rules.put(12,"+371");
+        HashMap<String, Integer> rules = new HashMap<>();
+        rules.put("+371", 12);
         PhoneValidator customPhoneValidator = new PhoneValidator(rules);
         assertEquals("+37161234567", customPhoneValidator.validate("+37161234567"));
     }
 
     @Test
     void Should_Throw_WhenRuleLengthIsLessThanPrefix() {
-        HashMap<Integer,String> rules = new HashMap<Integer,String>();
-        rules.put(2,"+371");
+        HashMap<String, Integer> rules = new HashMap<>();
+        rules.put("+371", 2);
         assertThrows(PhoneNumberRullIncorrectException.class, () -> {PhoneValidator customPhoneValidator = new PhoneValidator(rules);});
 
     }
